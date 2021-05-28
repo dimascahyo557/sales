@@ -24,8 +24,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(3);
-        return view('category.index', compact('categories'));
+        $search = request()->input('search');
+        $categories = Category::search($search)->paginate(3);
+        return view('category.index', compact('categories', 'search'));
     }
 
     /**

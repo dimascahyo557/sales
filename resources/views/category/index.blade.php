@@ -39,6 +39,15 @@
         </div>
       @endif
 
+      {{-- Search data --}}
+        <form action="" method="get">
+          <div class="form-group">
+            <label for="search">Search</label>
+            <input type="search" name="search" class="form-control" value="{{ $search }}" placeholder="Search data" autofocus>
+          </div>
+        </form>
+      {{-- End Search data --}}
+
       <table class="table table-bordered">
         <thead>
           <tr>

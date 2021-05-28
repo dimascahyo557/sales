@@ -17,4 +17,23 @@ class Category extends Model
     protected $fillable = [
         'category'
     ];
+
+    /*
+     | =================================================================
+     | Scope Model
+     | =================================================================
+     */
+
+     /**
+      * Search data with like condition
+      * 
+      * @param \Illuminate\Database\Eloquent\Builder $query
+      * @param String|null $keyword
+      */
+     public function scopeSearch($query, String $keyword = null)
+     {
+         $keyword = "%{$keyword}%";
+
+         return $query->where('category', 'like', $keyword);
+     }
 }
