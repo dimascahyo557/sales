@@ -29,8 +29,8 @@
           </a>
         </li>
 
-        <li class="nav-item {{ $isPage([route('category.index')], 'menu-open') }}">
-          <a href="#" class="nav-link {{ $isPage([route('category.index')], 'active') }}">
+        <li class="nav-item {{ $isPage([route('category.index'),route('product.index')], 'menu-open') }}">
+          <a href="#" class="nav-link {{ $isPage([route('category.index'),route('product.index')], 'active') }}">
             <i class="nav-icon fas fa-folder-open"></i>
             <p>
               Data
@@ -45,7 +45,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('product.index') }}" class="nav-link {{ $isPage([route('product.index')], 'active') }}">
                 <i class="fas fa-list nav-icon"></i>
                 <p>Product</p>
               </a>

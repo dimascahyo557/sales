@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Category')
-@section('content-title', 'Category')
+@section('title', 'Product')
+@section('content-title', 'Product')
 @section('breadcrumb')
   <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-  <li class="breadcrumb-item active">Category</li>
+  <li class="breadcrumb-item active">Product</li>
 @endsection
 @section('content')
   <div class="card">
     <div class="card-header">
       <div class="card-title">
         <i class="fas fa-table"></i>
-        Categories data table
+        Products data table
       </div>
-      <a href="{{ route('category.create') }}" class="float-right">
+      <a href="{{ route('product.create') }}" class="float-right">
         <i class="fas fa-plus"></i>
         Add
       </a>
@@ -53,20 +53,36 @@
           <tr>
             <th>ID</th>
             <th>Category</th>
-            <th style="width: 120px">Action</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>SKU</th>
+            <th>Image</th>
+            <th>Status</th>
+            <th style="width: 200px">Action</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($categories as $category)
+          @foreach ($products as $product)
             <tr>
-              <td>{{ $category->id }}</td>
-              <td>{{ $category->category }}</td>
+              <td>{{ $product->id }}</td>
+              <td>{{ $product->category->category }}</td>
+              <td>{{ $product->name }}</td>
+              <td>{{ $product->price }}</td>
+              <td>{{ $product->sku }}</td>
+              <td>{{ $product->image }}</td>
+              <td>{{ $product->status }}</td>
               <td>
                 <div class="btn-group">
-                  <a href="{{ route('category.edit', ['category' => $category->id]) }}" class="btn btn-success">
+                  <a href="{{ route('product.show', ['product' => $product->id]) }}" class="btn btn-info">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="{{ route('product.edit', ['product' => $product->id]) }}" class="btn btn-success">
                     <i class="fas fa-pen"></i>
                   </a>
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal" data-url="{{ route('category.destroy', ['category' => $category->id]) }}">
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal" data-url="{{ route('product.destroy', ['product' => $product->id]) }}">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#delete-modal" data-url="{{ route('product.force-delete', ['product' => $product->id]) }}">
                     <i class="fas fa-trash-alt"></i>
                   </button>
                 </div>
@@ -76,7 +92,7 @@
         </tbody>
       </table>
       <div class="mt-3">
-        {{ $categories->links() }}
+        {{ $products->links() }}
       </div>
     </div>
   </div>
