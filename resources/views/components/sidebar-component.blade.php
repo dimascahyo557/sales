@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link">
-    <img src="{{ asset('img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="{{ asset('asset/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
   </a>
 
@@ -10,7 +10,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+        <img src="{{ asset('asset/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
         <a href="#" class="d-block">{{ auth()->user()->name }}</a>
@@ -21,7 +21,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="#" class="nav-link {{ $isPage([route('home')], 'active') }}">
+          <a href="{{ route('home') }}" class="nav-link {{ $isPage([route('home')], 'active') }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -29,8 +29,8 @@
           </a>
         </li>
 
-        <li class="nav-item menu-open">
-          <a href="#" class="nav-link">
+        <li class="nav-item {{ $isPage([route('category.index')], 'menu-open') }}">
+          <a href="#" class="nav-link {{ $isPage([route('category.index')], 'active') }}">
             <i class="nav-icon fas fa-folder-open"></i>
             <p>
               Data
@@ -39,7 +39,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('category.index') }}" class="nav-link {{ $isPage([route('category.index')], 'active') }}">
                 <i class="fas fa-book nav-icon"></i>
                 <p>Category</p>
               </a>

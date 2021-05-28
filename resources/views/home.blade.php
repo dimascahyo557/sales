@@ -2,7 +2,9 @@
 
 @section('title', 'Dashboard')
 @section('content-title', 'Dashboard')
-
+@section('breadcrumb')
+  <li class="breadcrumb-item active">Home</li>
+@endsection
 @section('content')
 <div class="container">
   <div class="row">
