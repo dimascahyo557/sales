@@ -11,7 +11,7 @@
   <div class="card">
     <div class="card-header">
       <div class="card-title">
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-pen"></i>
         Edit category
       </div>
     </div>

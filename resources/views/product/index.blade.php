@@ -18,7 +18,7 @@
         Add
       </a>
     </div>
-    <div class="card-body">
+    <div class="card-body overflow-auto">
       {{-- Session success --}}
       @if (session('success'))
         <div class="alert alert-success" role="alert">
@@ -48,49 +48,57 @@
         </form>
       {{-- End Search data --}}
 
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Category</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>SKU</th>
-            <th>Image</th>
-            <th>Status</th>
-            <th style="width: 200px">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($products as $product)
+      <div class="overflow-auto">
+        <table class="table table-bordered">
+          <thead>
             <tr>
-              <td>{{ $product->id }}</td>
-              <td>{{ $product->category->category }}</td>
-              <td>{{ $product->name }}</td>
-              <td>{{ $product->price }}</td>
-              <td>{{ $product->sku }}</td>
-              <td>{{ $product->image }}</td>
-              <td>{{ $product->status }}</td>
-              <td>
-                <div class="btn-group">
-                  <a href="{{ route('product.show', ['product' => $product->id]) }}" class="btn btn-info">
-                    <i class="fas fa-eye"></i>
-                  </a>
-                  <a href="{{ route('product.edit', ['product' => $product->id]) }}" class="btn btn-success">
-                    <i class="fas fa-pen"></i>
-                  </a>
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal" data-url="{{ route('product.destroy', ['product' => $product->id]) }}">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#delete-modal" data-url="{{ route('product.force-delete', ['product' => $product->id]) }}">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </div>
-              </td>
+              <th>ID</th>
+              <th>Category</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>SKU</th>
+              <th>Image</th>
+              <th>Status</th>
+              <th style="width: 200px">Action</th>
             </tr>
-          @endforeach
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @foreach ($products as $product)
+              <tr>
+                <td>{{ $product->id }}</td>
+                <td>{{ $product->category->category }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ "Rp " . number_format($product->price, 2, ',', '.') }}</td>
+                <td>{{ $product->sku }}</td>
+                <td>
+                  @if ($product->image)
+                    <img src="{{ Storage::url($product->image) }}" alt="product" width="100px">
+                  @else
+                    <i>No image</i>
+                  @endif
+                </td>
+                <td>{{ $product->status }}</td>
+                <td>
+                  <div class="btn-group">
+                    <a href="{{ route('product.show', ['product' => $product->id]) }}" class="btn btn-info">
+                      <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="{{ route('product.edit', ['product' => $product->id]) }}" class="btn btn-success">
+                      <i class="fas fa-pen"></i>
+                    </a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal" data-url="{{ route('product.destroy', ['product' => $product->id]) }}">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-toggle2="tooltip" title="force delete" data-target="#delete-modal" data-url="{{ route('product.force-delete', ['product' => $product->id]) }}">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
       <div class="mt-3">
         {{ $products->links() }}
       </div>
@@ -98,4 +106,17 @@
   </div>
 
   <x-delete-modal>Are you sure?</x-delete-modal>
+@endsection
+@section('script')
+  <script>
+    $(function () {
+      $('[data-toggle2="tooltip"]').tooltip({
+        delay: {
+          show: 500,
+          hide: 100
+        },
+        placement: "bottom"
+      })
+    })
+  </script>
 @endsection

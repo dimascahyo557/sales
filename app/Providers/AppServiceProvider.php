@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Share category
+        view()->composer(['product.create', 'product.edit'], function ($view) {
+            $categories = Category::all();
+            
+            $view->with('categories', $categories);
+        });
     }
 }

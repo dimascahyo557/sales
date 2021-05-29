@@ -23,7 +23,7 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        ($this->method() === 'POST') ? $unique = ',' . $this->id : $unique = '';
+        ($this->method() === 'post') ?  $unique = '' : $unique = ',' . $this->segment(2);
         return [
             'category' => 'required|max:255|unique:categories,category' . $unique
         ];

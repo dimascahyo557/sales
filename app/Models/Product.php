@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -22,6 +23,14 @@ class Product extends Model
         'deleted_at',
     ];
 
+    /**
+     * Image location
+     * Ends with "/"
+     * 
+     * @var String
+     */
+    private $image_path = 'img/product/';
+
     /*
      | =================================================================
      | Relations
@@ -31,10 +40,10 @@ class Product extends Model
     /**
      * Belongs to category
      */
-     public function category()
-     {
-         return $this->belongsTo('App\Models\Category');
-     }
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
 
     /*
      | =================================================================
@@ -43,26 +52,15 @@ class Product extends Model
      */
 
      /**
-      * Get Price
-      * 
-      * @param Int $price
-      * @return String
-      */
-     public function getPriceAttribute($price)
-     {
-         return "Rp " . number_format($price, 2, ',', '.');
-     }
-
-     /**
       * Get SKU
       * 
       * @param String $price
       * @return String
       */
-     public function getSkuAttribute($sku)
-     {
-         return strtoupper($sku);
-     }
+    public function getSkuAttribute($sku)
+    {
+        return strtoupper($sku);
+    }
 
      /**
       * Get Status
@@ -70,10 +68,25 @@ class Product extends Model
       * @param Boolean $price
       * @return String
       */
-     public function getStatusAttribute($status)
-     {
-         return $status ? 'Active' : 'Inactive';
-     }
+    public function getStatusAttribute($status)
+    {
+        return $status ? 'Active' : 'Inactive';
+    }
+
+    /**
+     * Get Image
+     * 
+     * @param String|null $image
+     * @return String|null
+     */
+    public function getImageAttribute($image)
+    {   
+        if (Storage::exists($image)) {
+            return $image;
+        }
+        
+        return null;
+    }
 
     /*
      | =================================================================
@@ -87,12 +100,12 @@ class Product extends Model
       * @param \Illuminate\Database\Eloquent\Builder $query
       * @param String|null $keyword
       */
-      public function scopeSearch($query, String $keyword = null)
-      {
-          $keyword = "%{$keyword}%";
- 
-          return $query->where('name', 'like', $keyword)
-                    ->orWhere('price', 'like', $keyword)
-                    ->orWhere('sku', 'like', $keyword);
-      }
+    public function scopeSearch($query, String $keyword = null)
+    {
+        $keyword = "%{$keyword}%";
+
+        return $query->where('name', 'like', $keyword)
+                ->orWhere('price', 'like', $keyword)
+                ->orWhere('sku', 'like', $keyword);
+    }
 }
