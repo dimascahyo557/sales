@@ -36,7 +36,7 @@ class SidebarComponent extends Component
     public function isPage(Array $pages, String $return, String $default = null)
     {
         foreach ($pages as $page) {
-            if (request()->url() === $page) {
+            if (request()->segment(1) === $page) {
                 return $return;
             }
         }

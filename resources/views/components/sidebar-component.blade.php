@@ -21,7 +21,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="{{ route('home') }}" class="nav-link {{ $isPage([route('home')], 'active') }}">
+          <a href="{{ route('home') }}" class="nav-link {{ $isPage(['home'], 'active') }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -29,8 +29,8 @@
           </a>
         </li>
 
-        <li class="nav-item {{ $isPage([route('category.index'),route('product.index')], 'menu-open') }}">
-          <a href="#" class="nav-link {{ $isPage([route('category.index'),route('product.index')], 'active') }}">
+        <li class="nav-item {{ $isPage(['category', 'product'], 'menu-open') }}">
+          <a href="#" class="nav-link {{ $isPage(['category', 'product'], 'active') }}">
             <i class="nav-icon fas fa-folder-open"></i>
             <p>
               Data
@@ -39,13 +39,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ route('category.index') }}" class="nav-link {{ $isPage([route('category.index')], 'active') }}">
+              <a href="{{ route('category.index') }}" class="nav-link {{ $isPage(['category'], 'active') }}">
                 <i class="fas fa-book nav-icon"></i>
                 <p>Category</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('product.index') }}" class="nav-link {{ $isPage([route('product.index')], 'active') }}">
+              <a href="{{ route('product.index') }}" class="nav-link {{ $isPage(['product'], 'active') }}">
                 <i class="fas fa-list nav-icon"></i>
                 <p>Product</p>
               </a>
