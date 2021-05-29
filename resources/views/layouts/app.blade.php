@@ -218,6 +218,10 @@
 </div>
 <!-- ./wrapper -->
 
+{{-- Logout Modal --}}
+<x-logout-modal></x-logout-modal>
+{{-- End Logout Modal --}}
+
 <!-- REQUIRED SCRIPTS -->
 
 <!-- Bootstrap 4 -->

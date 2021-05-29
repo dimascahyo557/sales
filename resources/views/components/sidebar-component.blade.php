@@ -69,6 +69,14 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-toggle="modal" data-target="#logout-modal">
+            <i class="nav-icon fas fa-sign-out-alt"></i>
+            <p>
+              Logout
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
