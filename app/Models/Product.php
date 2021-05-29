@@ -108,4 +108,18 @@ class Product extends Model
                 ->orWhere('price', 'like', $keyword)
                 ->orWhere('sku', 'like', $keyword);
     }
+
+     /**
+      * Search data with like condition
+      * 
+      * @param \Illuminate\Database\Eloquent\Builder $query
+      * @param Int|null $keyword
+      */
+    public function scopeFilter($query, Int $category = null)
+    {
+        if ($category !== null) {
+            return $query->where('category_id', $category);
+        }
+        return $query;
+    }
 }

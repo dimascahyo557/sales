@@ -26,8 +26,13 @@ class ProductController extends Controller
     public function index()
     {
         $search = request()->input('search');
-        $products = Product::search($search)->paginate(3);
-        return view('product.index', compact('products', 'search'));
+        $filter = request()->input('filter');
+        $products = Product::filter($filter)->search($search)->paginate(3);
+
+        // Appends query string
+        $products->appends(['filter' => $filter, 'search' => $search]);
+
+        return view('product.index', compact('products', 'search', 'filter'));
     }
 
     /**

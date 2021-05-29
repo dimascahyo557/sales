@@ -39,14 +39,29 @@
         </div>
       @endif
 
-      {{-- Search data --}}
-        <form action="" method="get">
-          <div class="form-group">
-            <label for="search">Search</label>
-            <input type="search" name="search" class="form-control" value="{{ $search }}" placeholder="Search data" autofocus>
+      {{-- Search and filter data --}}
+        <form action="" method="get" id="filter">
+          <div class="row">
+            <div class="col-6">
+              <div class="rorm-group">
+                <label for="filter">Category</label>
+                <select name="filter" class="form-control" id="filter" onchange="document.getElementById('filter').submit()">
+                  <option value="">All category</option>
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @if($filter == $category->id) selected @endif>{{ $category->category }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="search">Search</label>
+                <input type="search" name="search" class="form-control" value="{{ $search }}" placeholder="Search and filter data" autofocus>
+              </div>
+            </div>
           </div>
         </form>
-      {{-- End Search data --}}
+      {{-- End search and filter data --}}
 
       <div class="overflow-auto">
         <table class="table table-bordered">
